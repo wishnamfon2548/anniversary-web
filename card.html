@@ -2,9 +2,9 @@
 <html lang="th">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>บัตรตามใจของเรา</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>สร้างลิงก์บัตรตามใจ (สำหรับลูกค้า)</title>
     <link href="https://fonts.googleapis.com/css2?family=Mali&display=swap" rel="stylesheet">
     <style>
         * {
@@ -25,62 +25,55 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 28px;
         }
 
-        .container {
-            width: min(980px, 96vw);
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 14px;
+        .wrap {
+            width: min(960px, 96vw);
         }
 
         h1 {
+            text-align: center;
             font-size: 28px;
-        }
-
-        .grid {
-            display: grid;
-            gap: 14px;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            margin-bottom: 14px;
         }
 
         .card {
             background: #fff;
             border: 2px solid #E86C8D;
             border-radius: 18px;
-            padding: 16px;
+            padding: 18px;
             box-shadow: 0 10px 24px rgba(0, 0, 0, .08);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            transition: transform .12s ease, box-shadow .12s ease;
+            margin-bottom: 16px;
         }
 
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 30px rgba(0, 0, 0, .12);
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
 
-        .title {
-            font-weight: 700;
+        label {
+            font-size: 14px;
+            opacity: .9;
+            display: block;
+            margin-bottom: 6px;
         }
 
-        .pill {
-            font-size: 12px;
-            background: #fff0f4;
-            border: 1px solid #f4b4c6;
-            padding: 6px 10px;
-            border-radius: 999px;
-            display: inline-block;
+        input[type="text"],
+        .readonly {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1.5px solid #f0b7c9;
+            background: #fff;
+            font-family: 'Mali', cursive;
+            font-size: 16px;
+            color: #5C3A42;
         }
 
-        .actions {
-            margin-top: auto;
-            display: flex;
-            gap: 8px;
+        .readonly {
+            background: #fffdfd;
         }
 
         .btn {
@@ -108,185 +101,241 @@
             box-shadow: none;
         }
 
-        .footer {
-            text-align: center;
-            margin-top: 16px;
-            opacity: .8;
-        }
-
-        /* โมดัลยืนยัน */
-        .backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, .38);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-        }
-
-        .modal {
-            width: min(460px, 96vw);
-            background: #fff;
-            border-radius: 16px;
-            padding: 18px;
-            text-align: center;
-            border: 2px solid #E86C8D;
-        }
-
-        .modal h3 {
-            margin: 6px 0 8px;
-        }
-
-        .row {
+        .actions {
             display: flex;
-            gap: 10px;
-            justify-content: center;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
-        .hidden {
-            display: none !important;
+        .hint {
+            font-size: 13px;
+            opacity: .8;
         }
 
-        .empty {
-            text-align: center;
-            margin: 16px 0;
+        .list {
+            margin-top: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px dashed #f1c1d0;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        th {
+            background: #fff7fa;
+        }
+
+        .pill {
+            font-size: 12px;
+            background: #fff0f4;
+            border: 1px solid #f4b4c6;
+            padding: 4px 8px;
+            border-radius: 999px;
+            display: inline-block;
+        }
+
+        .center {
+            text-align: center
+        }
+
+        .mt {
+            margin-top: 10px
+        }
+
+        .mb {
+            margin-bottom: 8px
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <h1>บัตรตามใจของเรา 🎟️</h1>
-            <div id="info" class="footer"></div>
-        </header>
+    <div class="wrap">
+        <h1>สร้างลิงก์บัตรตามใจให้ลูกค้า 🎟️</h1>
 
-        <section id="grid" class="grid" aria-live="polite"></section>
-        <div id="empty" class="empty hidden">ใช้บัตรครบแล้วค่ะ 💖</div>
-
-        <!-- Modal -->
-        <div id="backdrop" class="backdrop" role="dialog" aria-modal="true">
-            <div class="modal">
-                <h3>ยืนยันการใช้บัตร</h3>
-                <p id="confirmText">จะใช้บัตรนี้ตอนนี้ไหม? ใช้แล้วเอากลับไม่ได้</p>
-                <div class="row">
-                    <button id="confirmBtn" class="btn">ยืนยันใช้บัตร</button>
-                    <button id="cancelBtn" class="btn ghost">ยกเลิก</button>
+        <!-- การตั้งค่า -->
+        <section class="card">
+            <div class="row">
+                <div>
+                    <label>ชื่อคู่ลูกค้า (ไว้ดูประวัติ)</label>
+                    <input id="customerName" type="text" placeholder="เช่น ฟ้า-ต้น หรือ Order #1234">
+                </div>
+                <div>
+                    <label>หน้าบัตรปลายทาง (ไฟล์ในเว็บของคุณ)</label>
+                    <input id="targetPage" type="text" class="readonly">
+                    <div class="hint mt">* ระบบกำหนดให้อัตโนมัติจาก URL ปัจจุบัน (แก้ได้ เช่น <code>card.html</code>
+                        หรือ <code>coupons.html</code>)</div>
                 </div>
             </div>
-        </div>
+
+            <div class="actions mt">
+                <button id="genBtn" class="btn">สร้างลิงก์ใหม่</button>
+                <button id="clearBtn" class="btn ghost">ล้างประวัติในเครื่อง</button>
+            </div>
+
+            <div class="mt">
+                <label>ลิงก์ที่สร้างล่าสุด</label>
+                <input id="lastLink" type="text" class="readonly" readonly
+                    placeholder="ยังไม่มีลิงก์ — กด ‘สร้างลิงก์ใหม่’ ก่อนจ้า">
+                <div class="actions mt">
+                    <button id="copyBtn" class="btn" disabled>คัดลอกลิงก์</button>
+                    <button id="openBtn" class="btn ghost" disabled>เปิดลิงก์</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- รายการที่เคยสร้าง -->
+        <section class="card">
+            <div class="mb"><span class="pill">ประวัติลิงก์ที่สร้างในเครื่องนี้</span></div>
+            <div class="list">
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <th style="width:30%">คู่ลูกค้า</th>
+                            <th>ลิงก์</th>
+                            <th style="width:22%">สร้างเมื่อ</th>
+                            <th class="center" style="width:160px">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <tr>
+                            <td colspan="4" class="center hint">ยังไม่มีรายการ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <p class="hint center">
+            การทำงาน: ใครก็ตามที่เปิดลิงก์เดียวกัน (id เดียวกัน) สถานะบัตรจะซิงก์กันแบบเรียลไทม์ 💗
+        </p>
     </div>
 
-    <script type="module">
-        import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+    <script>
+        // === ค่าพื้นฐาน/การเก็บประวัติ ===
+        const LS_KEY = 'love_links_v1';
 
-        // --- ตั้งค่าโปรเจกต์ของคุณ ---
-        const SUPABASE_URL = 'https://ktieambfqbtduelcwrex.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0aWVhbWJmcWJ0ZHVlbGN3cmV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1NzMyNzYsImV4cCI6MjA3NzE0OTI3Nn0.tWShEMqOalLANV8aqpQvWx1pGAS8wWLR3DS1AUtr-SQ';
-        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // สร้างค่าเริ่มต้นของ targetPage จาก URL ปัจจุบัน (ชี้ไปที่ card.html/coupons.html)
+        const targetPageInput = document.getElementById('targetPage');
+        (function initTarget() {
+            const here = new URL(location.href);
+            // เดาว่าหน้าปลายทางคือ card.html ถ้าไฟล์นี้ชื่ออื่นแก้ได้ตามต้องการ
+            const defaultPage = 'card.html';
+            // สร้าง path ใน repo เดียวกัน
+            const base = here.origin + here.pathname.replace(/[^/]+$/, '');
+            targetPageInput.value = base + defaultPage;
+        })();
 
-        // --- ดึง order_id จากลิงก์ ---
-        const params = new URL(location.href).searchParams;
-        const orderId = params.get('id'); // ต้องเป็น UUID/โค้ดเดายาก
-        if (!orderId) {
-            document.body.innerHTML = '<p style="font-family:Mali">ลิงก์ไม่ถูกต้อง (ขาดพารามิเตอร์ id)</p>';
-            throw new Error('missing order id');
+        const genBtn = document.getElementById('genBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const openBtn = document.getElementById('openBtn');
+        const lastLink = document.getElementById('lastLink');
+        const nameEl = document.getElementById('customerName');
+        const tbody = document.getElementById('tbody');
+
+        // โหลดประวัติ
+        function loadHistory() {
+            try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); }
+            catch { return []; }
         }
-        document.getElementById('info').textContent = `ลิงก์ของชุดบัตรนี้: ${orderId}`;
+        function saveHistory(list) {
+            localStorage.setItem(LS_KEY, JSON.stringify(list));
+        }
 
-        // --- รายการบัตรแม่แบบ (แก้ไขได้) ---
-        const COUPONS = [
-            { id: 'wish-anything-1', title: 'บัตรขออะไรก็ได้ 1 อย่าง', desc: 'ขอได้หนึ่งอย่าง ภายใต้เหตุผลและความปลอดภัย' },
-            { id: 'free-day-1', title: 'บัตรตามใจ 1 วัน', desc: 'หนึ่งวันให้เธอเป็นคนกำหนดทุกอย่าง' },
-            { id: 'shop-1000-1', title: 'บัตรซื้ออะไรก็ได้ 1,000 บาท', desc: 'เลือกสิ่งที่อยากได้ เราเลี้ยงให้' },
-            { id: 'massage-1', title: 'บัตรนวดผ่อนคลาย 30 นาที', desc: 'เลือกหัว/ไหล่/หลัง 1 อย่าง' },
-            { id: 'movie-1', title: 'บัตรดูหนังด้วยกัน', desc: 'เรื่องไหนก็ได้ตามใจเธอ' },
-        ];
-
-        const grid = document.getElementById('grid');
-        const empty = document.getElementById('empty');
-        const backdrop = document.getElementById('backdrop');
-        const confirmBtn = document.getElementById('confirmBtn');
-        const cancelBtn = document.getElementById('cancelBtn');
-        let pendingCouponId = null;
-
-        // --- โหลดสถานะที่ใช้แล้วจาก DB ---
-        async function refresh() {
-            const { data, error } = await supabase
-                .from('coupon_redemptions')
-                .select('coupon_id')
-                .eq('order_id', orderId);
-
-            if (error) {
-                grid.innerHTML = `<p>โหลดสถานะไม่สำเร็จ: ${error.message}</p>`;
+        function renderTable() {
+            const list = loadHistory();
+            if (list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="center hint">ยังไม่มีรายการ</td></tr>`;
                 return;
             }
-            const used = new Set(data.map(r => r.coupon_id));
-            render(COUPONS.filter(c => !used.has(c.id)));
-        }
-
-        function render(list) {
-            grid.innerHTML = '';
-            if (list.length === 0) {
-                empty.classList.remove('hidden');
-            } else {
-                empty.classList.add('hidden');
-            }
-            list.forEach(c => {
-                const el = document.createElement('article');
-                el.className = 'card'; el.dataset.id = c.id;
-                el.innerHTML = `
-          <div class="title">${c.title}</div>
-          <div>${c.desc || ''}</div>
-          <div><span class="pill">ยังไม่ใช้</span></div>
-          <div class="actions">
-            <button class="btn" data-action="redeem">ใช้บัตร</button>
-          </div>
+            tbody.innerHTML = '';
+            list.forEach((item, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+          <td>${escapeHtml(item.name || '-')}</td>
+          <td><a href="${item.link}" target="_blank">${item.link}</a></td>
+          <td>${new Date(item.created).toLocaleString()}</td>
+          <td class="center">
+            <button class="btn" data-act="copy" data-i="${idx}">คัดลอก</button>
+            <button class="btn ghost" data-act="del" data-i="${idx}">ลบ</button>
+          </td>
         `;
-                el.querySelector('[data-action="redeem"]').onclick = () => openConfirm(c.id, c.title);
-                grid.appendChild(el);
+                tbody.appendChild(tr);
             });
         }
 
-        function openConfirm(id, title) {
-            pendingCouponId = id;
-            document.getElementById('confirmText').textContent =
-                `จะใช้ “${title}” ตอนนี้ไหม? ใช้แล้วเอากลับไม่ได้`;
-            backdrop.style.display = 'flex';
+        function escapeHtml(s = '') {
+            return s.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
         }
-        function closeConfirm() { backdrop.style.display = 'none'; pendingCouponId = null; }
-        cancelBtn.onclick = closeConfirm;
 
-        confirmBtn.onclick = async () => {
-            if (!pendingCouponId) return;
-            // บันทึกว่าใช้แล้ว (PK กันซ้ำ)
-            const { error } = await supabase.from('coupon_redemptions').insert({
-                order_id: orderId,
-                coupon_id: pendingCouponId
-            });
-            closeConfirm();
-            if (error) { alert('เกิดข้อผิดพลาด: ' + error.message); return; }
-            // ลบการ์ดออกทันที
-            grid.querySelector(`[data-id="${pendingCouponId}"]`)?.remove();
-            if (grid.children.length === 0) empty.classList.remove('hidden');
-        };
+        // สร้างลิงก์ใหม่
+        genBtn.addEventListener('click', () => {
+            const page = targetPageInput.value.trim();
+            if (!page) { alert('กรุณากรอกหน้าปลายทาง เช่น card.html'); return; }
 
-        // --- ซิงก์เรียลไทม์: อัปเดตทุกอุปกรณ์ทันทีเมื่ออีกฝั่งกดใช้ ---
-        supabase
-            .channel('realtime:redemptions')
-            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'coupon_redemptions', filter: `order_id=eq.${orderId}` },
-                (payload) => {
-                    const cid = payload.new.coupon_id;
-                    grid.querySelector(`[data-id="${cid}"]`)?.remove();
-                    if (grid.children.length === 0) empty.classList.remove('hidden');
+            const id = (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2)) + Date.now();
+            const url = new URL(page, location.href); // รองรับทั้ง absolute/relative
+            url.searchParams.set('id', id);
+
+            lastLink.value = url.toString();
+            copyBtn.disabled = openBtn.disabled = false;
+
+            const list = loadHistory();
+            list.unshift({ name: nameEl.value.trim(), link: url.toString(), id, created: Date.now() });
+            saveHistory(list);
+            renderTable();
+        });
+
+        // คัดลอก/เปิดลิงก์ล่าสุด
+        copyBtn.addEventListener('click', async () => {
+            if (!lastLink.value) return;
+            await navigator.clipboard.writeText(lastLink.value);
+            copyBtn.textContent = 'คัดลอกแล้ว ✓';
+            setTimeout(() => copyBtn.textContent = 'คัดลอกลิงก์', 1200);
+        });
+        openBtn.addEventListener('click', () => {
+            if (!lastLink.value) return;
+            window.open(lastLink.value, '_blank');
+        });
+
+        // จัดการตาราง (คัดลอก/ลบ)
+        tbody.addEventListener('click', async (e) => {
+            const btn = e.target.closest('button'); if (!btn) return;
+            const i = +btn.dataset.i;
+            const act = btn.dataset.act;
+            const list = loadHistory();
+            const item = list[i];
+            if (!item) return;
+
+            if (act === 'copy') {
+                await navigator.clipboard.writeText(item.link);
+                btn.textContent = 'คัดลอกแล้ว ✓';
+                setTimeout(() => btn.textContent = 'คัดลอก', 1000);
+            } else if (act === 'del') {
+                if (confirm('ลบรายการนี้ออกจากประวัติ?')) {
+                    list.splice(i, 1); saveHistory(list); renderTable();
                 }
-            )
-            .subscribe();
+            }
+        });
 
-        // start
-        refresh();
+        // ล้างประวัติทั้งหมด
+        clearBtn.addEventListener('click', () => {
+            if (confirm('ล้างประวัติที่สร้างไว้ทั้งหมดเฉพาะในเครื่องนี้?')) {
+                localStorage.removeItem(LS_KEY);
+                renderTable();
+            }
+        });
+
+        // เริ่มต้น
+        renderTable();
     </script>
 </body>
 
