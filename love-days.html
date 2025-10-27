@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เราคบกันมานานเท่าไหร่แล้วนะ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mali&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Mali', cursive;
+            background: linear-gradient(to right, #FFC2D1, #FFFFFF, #FFC2D1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 25px;
+            padding: 40px 60px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 2px solid #E86C8D;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h2 {
+            color: #5C3A42;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .days {
+            font-size: 48px;
+            color: #5C3A42;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .small {
+            font-size: 18px;
+            color: #5C3A42;
+            margin-bottom: 18px;
+        }
+
+        .photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 28px;
+            border: 2px solid #E86C8D;
+        }
+
+        .time-boxes {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .box {
+            background: #E86C8D;
+            color: white;
+            border-radius: 15px;
+            padding: 16px 26px;
+            font-size: 22px;
+            box-shadow: 0 6px 18px rgba(232, 108, 141, 0.3);
+            min-width: 90px;
+        }
+
+        .box small {
+            display: block;
+            font-size: 14px;
+            margin-top: 3px;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            margin-top: 32px;
+            display: inline-block;
+            background: #E86C8D;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 30px;
+            border-radius: 999px;
+            font-size: 18px;
+            transition: 0.2s;
+            box-shadow: 0 6px 18px rgba(232, 108, 141, 0.35);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(232, 108, 141, 0.45);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h2>ตั้งแต่วันแรกที่คบกัน</h2>
+        <div class="days" id="daysCount">0</div>
+        <div class="small">วัน</div>
+
+        <img src="img/love.jpg" alt="คู่ของเรา" class="photo">
+
+        <div class="time-boxes">
+            <div class="box"><span id="days">0</span><small>วัน</small></div>
+            <div class="box"><span id="hours">0</span><small>ชั่วโมง</small></div>
+            <div class="box"><span id="minutes">0</span><small>นาที</small></div>
+            <div class="box"><span id="seconds">0</span><small>วินาที</small></div>
+        </div>
+    </div>
+    <a href="menu.html" class="back-btn">ย้อนกลับ</a>
+
+    <script>
+        // === ตั้งค่าวันที่เริ่มคบกัน ===
+        const startDate = new Date("2025-05-04T20:00:00"); // เปลี่ยนวันที่นี้ได้เลย
+        const daysCountEl = document.getElementById("daysCount");
+        const daysEl = document.getElementById("days");
+        const hoursEl = document.getElementById("hours");
+        const minutesEl = document.getElementById("minutes");
+        const secondsEl = document.getElementById("seconds");
+
+        function updateLoveTime() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            daysCountEl.textContent = days;
+            daysEl.textContent = days;
+            hoursEl.textContent = hours;
+            minutesEl.textContent = minutes;
+            secondsEl.textContent = seconds;
+        }
+
+        updateLoveTime();
+        setInterval(updateLoveTime, 1000);
+    </script>
+</body>
+
+</html>

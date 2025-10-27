@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จดหมายถึงคนน่ารัก</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mali&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Mali', cursive;
+            background: linear-gradient(to right, #FFC2D1, #FFFFFF, #FFC2D1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .letter-card {
+            background: #fff;
+            border-radius: 25px;
+            padding: 50px 40px 40px;
+            width: min(90%, 700px);
+            border: 2px solid #E86C8D;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #5C3A42;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #5C3A42;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            white-space: pre-line;
+        }
+
+        .close-btn {
+            background: #E86C8D;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 36px;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 6px 18px rgba(232, 108, 141, 0.3);
+        }
+
+        .close-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(232, 108, 141, 0.4);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="letter-card">
+        <h2>Happy Anniversary</h2>
+        <p>
+            ครบรอบ 1 ปีของเราแล้วนะ
+            ขอบคุณที่อยู่ข้างกันเสมอทั้งวันที่ดีและวันที่ยาก
+            ขอบคุณที่เข้ามาเติมเต็มชีวิตของเราให้มีความสุขขึ้นทุกวัน
+            รักเธอมากนะ
+
+            ขอให้ปีต่อๆ ไปมีแต่รอยยิ้มและความอบอุ่น
+            เหมือนทุกวันที่เราอยู่ด้วยกัน
+        </p>
+
+        <!-- ปุ่มกลับไปหน้าเมนู -->
+        <button class="close-btn" onclick="window.location.href='menu.html'">ปิด</button>
+    </div>
+</body>
+
+</html>
