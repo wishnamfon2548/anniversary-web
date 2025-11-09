@@ -21,7 +21,7 @@
 
         body {
             font-family: 'Mali', cursive;
-            background: linear-gradient(to right, #FFC2D1, #FFFFFF, #FFC2D1);
+            background: linear-gradient(to right, #FDC7D7, #FFFFFF, #FDC7D7);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -146,6 +146,315 @@
         .btn:active {
             transform: none;
             box-shadow: 0 8px 18px rgba(232, 108, 141, .28)
+        }
+
+
+
+
+
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(28px, env(safe-area-inset-left));
+                padding-right: max(28px, env(safe-area-inset-right));
+                padding-top: max(28px, env(safe-area-inset-top));
+                padding-bottom: max(28px, env(safe-area-inset-bottom));
+            }
+        }
+
+        /* ---------- โทรศัพท์เล็กมาก (≤ 360px) ---------- */
+        @media (max-width: 360px) {
+            body {
+                gap: 16px;
+                padding: 22px 14px;
+            }
+
+            .card {
+                width: min(94vw, 420px);
+                padding: 26px 24px 24px;
+                border-radius: 22px;
+                box-shadow: 0 10px 28px rgba(0, 0, 0, .14);
+            }
+
+            .h-1 {
+                font-size: 22px;
+                margin-bottom: 4px;
+            }
+
+            .hint {
+                font-size: 12px;
+                margin-bottom: 16px;
+            }
+
+            .inputs {
+                gap: 10px;
+            }
+
+            .otp {
+                width: 48px;
+                height: 54px;
+                font-size: 22px;
+                border-radius: 10px;
+            }
+
+            .error-inline {
+                font-size: 12px;
+                height: 18px;
+                margin-top: 10px;
+            }
+
+            .btn {
+                font-size: 15px;
+                padding: 10px 22px;
+            }
+        }
+
+        /* ---------- โทรศัพท์ทั่วไป (361–480px) ---------- */
+        @media (min-width: 361px) and (max-width: 480px) {
+            body {
+                gap: 18px;
+                padding: 24px 16px;
+            }
+
+            .card {
+                width: min(92vw, 480px);
+                padding: 30px 28px 26px;
+                border-radius: 24px;
+            }
+
+            .h-1 {
+                font-size: 24px;
+            }
+
+            .hint {
+                font-size: 13px;
+                margin-bottom: 18px;
+            }
+
+            .inputs {
+                gap: 12px;
+            }
+
+            .otp {
+                width: 54px;
+                height: 58px;
+                font-size: 23px;
+            }
+
+            .btn {
+                font-size: 16px;
+                padding: 11px 26px;
+            }
+        }
+
+        /* ---------- มือถือจอใหญ่ / Phablet (481–599px) ---------- */
+        @media (min-width: 481px) and (max-width: 599px) {
+            .card {
+                width: min(88vw, 520px);
+                padding: 32px 36px 28px;
+            }
+
+            .h-1 {
+                font-size: 26px;
+            }
+
+            .hint {
+                font-size: 14px;
+            }
+
+            .inputs {
+                gap: 14px;
+            }
+
+            .otp {
+                width: 58px;
+                height: 62px;
+                font-size: 24px;
+            }
+
+            .btn {
+                font-size: 17px;
+                padding: 12px 30px;
+            }
+        }
+
+        /* ---------- iPad / Tablet (600–1024px) ---------- */
+        @media (min-width: 600px) and (max-width: 1024px) {
+            body {
+                gap: 22px;
+                padding: 32px 28px;
+            }
+
+            .card {
+                width: min(80vw, 560px);
+                padding: 36px 44px 32px;
+                border-radius: 28px;
+                box-shadow: 0 14px 40px rgba(0, 0, 0, .15);
+            }
+
+            .h-1 {
+                font-size: 28px;
+            }
+
+            .hint {
+                font-size: 15px;
+                margin-bottom: 22px;
+            }
+
+            .inputs {
+                gap: 16px;
+            }
+
+            .otp {
+                width: 64px;
+                height: 68px;
+                font-size: 26px;
+            }
+
+            .btn {
+                font-size: 18px;
+                padding: 13px 34px;
+            }
+        }
+
+        /* ---------- แนวนอนความสูงน้อย (Landscape/จอเตี้ย) ---------- */
+        @media (orientation: landscape) and (max-height: 420px) {
+            body {
+                gap: 12px;
+                padding-top: 16px;
+                padding-bottom: 16px;
+            }
+
+            .card {
+                width: min(86vw, 600px);
+                padding: 22px 20px 18px;
+                border-radius: 20px;
+            }
+
+            .h-1 {
+                font-size: 20px;
+                margin-bottom: 2px;
+            }
+
+            .hint {
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+
+            .inputs {
+                gap: 8px;
+            }
+
+            .otp {
+                width: 44px;
+                height: 48px;
+                font-size: 20px;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 8px 18px;
+            }
+        }
+
+        /* ---------- ผู้ใช้ลด Motion ---------- */
+        @media (prefers-reduced-motion: reduce) {
+
+            .otp,
+            .btn {
+                transition: none !important;
+            }
+
+            .shake {
+                animation: none !important;
+            }
+        }
+
+        /* โทรศัพท์เล็กมาก (≤ 360px) */
+        @media (max-width: 360px) {
+            .card {
+                width: min(96vw, 420px);
+                padding: 20px 16px 18px;
+                /* ลด padding เพื่อเพิ่มพื้นที่เนื้อใน */
+            }
+
+            .inputs {
+                display: grid;
+                /* เปลี่ยนจาก flex เป็น grid */
+                grid-template-columns: repeat(6, 1fr);
+                gap: 8px;
+                /* ช่องว่างย่อให้สมดุล */
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .otp {
+                width: 100%;
+                /* ให้กว้างเต็ม cell */
+                height: auto;
+                aspect-ratio: 1 / 1;
+                /* ทำให้เป็นสี่เหลี่ยมจัตุรัส */
+                font-size: clamp(16px, 6.2vw, 20px);
+                border-radius: 10px;
+            }
+
+            .h-1 {
+                font-size: 20px;
+                margin-bottom: 2px;
+            }
+
+            .hint {
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+
+            .error-inline {
+                font-size: 12px;
+                height: 18px;
+                margin-top: 8px;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 8px 18px;
+            }
+        }
+
+        /* โทรศัพท์ทั่วไป (361–480px) */
+        @media (min-width: 361px) and (max-width: 480px) {
+            .card {
+                width: min(94vw, 480px);
+                padding: 24px 18px 20px;
+            }
+
+            .inputs {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 10px;
+                width: 100%;
+            }
+
+            .otp {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                font-size: clamp(18px, 5.4vw, 22px);
+            }
+        }
+
+        /* แนวนอนความสูงน้อย — กันล้นเวลาเอียงเครื่อง */
+        @media (orientation: landscape) and (max-height: 420px) {
+            .inputs {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 8px;
+            }
+
+            .otp {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                font-size: clamp(14px, 2.2vh, 18px);
+            }
         }
     </style>
 </head>
